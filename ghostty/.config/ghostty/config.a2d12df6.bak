@@ -1,0 +1,21 @@
+background-opacity = .8
+theme = Catppuccin Frappe
+background-blur-radius = 75
+window-decoration = false
+macos-titlebar-style = hidden
+auto-update = download
+
+# Keybinds
+keybind = ctrl+a>n=new_window
+keybind = ctrl+a>a=select_all
+keybind = ctrl+a>s=new_split:down
+keybind = ctrl+a>o=open_config
+keybind = ctrl+k=scroll_page_up 
+keybind = ctrl+a>r=reload_config
+keybind = ctrl+a>s=scroll_to_selection
+keybind = ctrl+a>c=open_config
+
+# ctrl+shift+,
+ 
+keybind = ctrl+shift+up=scroll_page_up
+keybind = ctrl+shift+down=scroll_page_down

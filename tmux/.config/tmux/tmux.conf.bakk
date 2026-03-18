@@ -1,0 +1,42 @@
+##### Minimal tmux.conf #####
+
+# Prefix
+unbind C-b
+set -g prefix C-Space
+bind C-Space send-prefix
+
+# Basic
+set -g mouse on
+set -g mode-keys vi
+set -g history-limit 100000
+
+# Terminal (stable)
+set -g default-terminal "screen-256color"
+set -as terminal-overrides ",*:Tc"
+
+##### Copy-mode / scroll bindings #####
+
+# Enter copy-mode with [
+bind [ copy-mode -e
+
+# Ctrl-k / Ctrl-j: scroll tmux history
+# - If already in copy-mode -> scroll
+# - If not in copy-mode -> enter copy-mode, then scroll
+bind -n C-k if-shell -F "#{pane_in_mode}" \
+  "send-keys -X scroll-up-line" \
+  "copy-mode -e \; send-keys -X scroll-up-line"
+
+bind -n C-j if-shell -F "#{pane_in_mode}" \
+  "send-keys -X scroll-down-line" \
+  "copy-mode -e \; send-keys -X scroll-down-line"
+
+# While in copy-mode (vi table), keep Ctrl-j/k scrolling
+bind -T copy-mode-vi C-k send-keys -X scroll-up-line
+bind -T copy-mode-vi C-j send-keys -X scroll-down-line
+
+# Selection keys (explicit, to avoid surprises)
+bind -T copy-mode-vi v     send-keys -X begin-selection
+bind -T copy-mode-vi V     send-keys -X select-line
+bind -T copy-mode-vi y     send-keys -X copy-selection-and-cancel
+bind -T copy-mode-vi Enter send-keys -X copy-selection-and-cancel
+bind -T copy-mode-vi Escape send-keys -X cancel
