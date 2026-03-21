@@ -68,3 +68,16 @@ end, { desc = "Indent lines between markdown headers (safe width)" })
 vim.api.nvim_create_user_command("IndentMarkdownByLevel", function()
   indent_between_headers(true)
 end, { desc = "Indent lines between markdown headers (by level, safe width)" })
+-- JSON COLORSCHEME
+local function set_json_colors()
+  vim.cmd("highlight @property.json guifg=#ff9e64")
+  vim.cmd("highlight @string.json guifg=#bb9af7")
+end
+
+-- run immediately (fixes startup)
+set_json_colors()
+
+-- run again whenever colorscheme changes
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = set_json_colors,
+})
