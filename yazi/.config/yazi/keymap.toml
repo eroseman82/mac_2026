@@ -139,6 +139,8 @@ keymap = [
 	{ on = [ "g", "s" ],       run = "cd ~/workspace/Scripts",  desc = "SCRIPTS" }, 
 	{ on = [ "g", "o" ],       run = "cd ~/Dropbox/April25/", desc = "DROPBOX" }, 
 	{ on = [ "g", "r" ],       run = "cd ~/core/library/recall/",  desc = "RECALL" },
+	{ on = [ "g", "u" ],       run = "cd ~/.claude",  desc = "CLAUDE" },
+	{ on = [ "g", "D" ],       run = "cd ~/.dev",  desc = "Dev" },
 		
 	# Tabs
 	
