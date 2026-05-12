@@ -285,3 +285,6 @@ goo() {
     mkdir "$dir"
     cd "$dir"
 }
+
+# fnm (Node version manager) — auto-switches Node per project via .nvmrc
+eval "$(fnm env --use-on-cd --shell zsh)"

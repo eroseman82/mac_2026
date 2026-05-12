@@ -5,8 +5,16 @@ ratio = [1, 2, 5]
 chrome = [
   { run = 'open -a "Google Chrome" "$@"', desc = "Chrome", for = "macos" }
 ]
+md-browser = [
+  { run = '~/.config/yazi/bin/md-to-browser.sh "$1"', desc = "Render markdown in Chrome", for = "macos" }
+]
+edit = [
+  { run = 'nvim "$@"', desc = "Edit in nvim", block = true, for = "unix" }
+]
 
 [open]
 prepend_rules = [
-  { mime = "text/html", use = [ "chrome" ] }
+  { mime = "text/html",  use = [ "chrome" ] },
+  { url = "*.md",        use = [ "edit", "md-browser" ] },
+  { url = "*.markdown",  use = [ "edit", "md-browser" ] }
 ]

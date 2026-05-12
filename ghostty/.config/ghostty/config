@@ -21,3 +21,15 @@ keybind = ctrl+k=scroll_page_up
 keybind = ctrl+shift+up=scroll_page_up
 keybind = ctrl+shift+down=scroll_page_down
 keybind = shift+enter=text:\x1b\r
+
+# Hyper+1..9 layer (right_cmd → F13..F21 via Karabiner).
+# Ghostty doesn't emit anything for F13+ by default — send standard xterm sequences.
+keybind = f13=text:\x1b[1;2P
+keybind = f14=text:\x1b[1;2Q
+keybind = f15=text:\x1b[1;2R
+keybind = f16=text:\x1b[1;2S
+keybind = f17=text:\x1b[15;2~
+keybind = f18=text:\x1b[17;2~
+keybind = f19=text:\x1b[18;2~
+keybind = f20=text:\x1b[19;2~
+keybind = f21=text:\x1b[20;2~
