@@ -123,7 +123,6 @@ function y() {
 #
 # Example aliases
 
-alias yt='/Users/er/Core/projects/link_db && uv run linx-channel youtube'
 # SUPABASE
 alias supa='psql "postgresql://postgres.qbclaqbqizitxhdhykdr:qHGCXuHLtQv8MESH@aws-0-us-east-1.pooler.supabase.com:6543/postgres"'
 # SSH 
@@ -288,3 +287,29 @@ goo() {
 
 # fnm (Node version manager) — auto-switches Node per project via .nvmrc
 eval "$(fnm env --use-on-cd --shell zsh)"
+
+# react-dev — launch any React/Next/Vite/CRA project on a chosen port
+react-dev() {
+  local port="${1:-3000}"
+  local dir="${2:-$PWD}"
+  cd "$dir" || return 1
+
+  [ -f .nvmrc ] || echo "22" > .nvmrc
+  eval "$(fnm env --shell zsh)" && fnm use || return 1
+  [ -d node_modules ] || npm install || return 1
+
+  local pid
+  pid=$(lsof -ti tcp:"$port" 2>/dev/null)
+  if [ -n "$pid" ]; then
+    echo "Port $port held by PID $pid ($(ps -p "$pid" -o comm=))."
+    read -q "?Kill it? [y/N] " || { echo; return 1; }
+    echo; kill "$pid" && sleep 1
+  fi
+
+  if   grep -q '"next"'        package.json; then npm run dev -- -p "$port"
+  elif grep -q '"vite"'        package.json; then npm run dev -- --port "$port"
+  elif grep -q 'react-scripts' package.json; then PORT="$port" npm start
+  else npm run dev
+  fi
+}
+alias rd='react-dev'

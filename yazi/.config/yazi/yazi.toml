@@ -1,5 +1,9 @@
 [mgr]
 ratio = [1, 2, 5]
+sort_by = "extension"
+sort_sensitive = false
+sort_reverse = false
+sort_dir_first = true
 
 [opener]
 chrome = [

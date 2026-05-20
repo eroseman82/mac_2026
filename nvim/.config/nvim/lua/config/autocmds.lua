@@ -68,6 +68,29 @@ end, { desc = "Indent lines between markdown headers (safe width)" })
 vim.api.nvim_create_user_command("IndentMarkdownByLevel", function()
   indent_between_headers(true)
 end, { desc = "Indent lines between markdown headers (by level, safe width)" })
+
+-- Auto-snap markdown content inward under its parent header on save.
+vim.api.nvim_create_augroup("IndentMarkdownOnSave", { clear = true })
+
+-- Disable LazyVim's format-on-save for markdown so prettier/conform doesn't
+-- strip the leading whitespace our indenter just added.
+vim.api.nvim_create_autocmd("FileType", {
+  group = "IndentMarkdownOnSave",
+  pattern = { "markdown" },
+  callback = function()
+    vim.b.autoformat = false
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = "IndentMarkdownOnSave",
+  pattern = { "*.md", "*.markdown" },
+  callback = function()
+    local view = vim.fn.winsaveview()
+    indent_between_headers(true)
+    vim.fn.winrestview(view)
+  end,
+})
 -- JSON COLORSCHEME
 local function set_json_colors()
   vim.cmd("highlight @property.json guifg=#ff9e64")
