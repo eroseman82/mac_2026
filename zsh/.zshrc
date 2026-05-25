@@ -313,3 +313,15 @@ react-dev() {
   fi
 }
 alias rd='react-dev'
+
+yt() {
+  local url
+  if [ $# -gt 0 ]; then
+    url="$1"; shift
+  else
+    read "url?paste link: "
+  fi
+  local target
+  target=$(cd /Users/er/.dev/scrapers/yt && uv run main.py "$url" "$@" | tee /dev/tty | tail -n1)
+  [ -d "$target" ] && cd "$target"
+}
