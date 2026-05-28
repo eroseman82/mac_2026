@@ -13,12 +13,12 @@ md-browser = [
   { run = '~/.config/yazi/bin/md-to-browser.sh "$1"', desc = "Render markdown in Chrome", for = "macos" }
 ]
 edit = [
-  { run = 'nvim "$@"', desc = "Edit in nvim", block = true, for = "unix" }
+  { run = 'nvim "$@"', desc = "Edit in nvim", block = true }
 ]
 
 [open]
 prepend_rules = [
-  { mime = "text/html",  use = [ "chrome" ] },
-  { url = "*.md",        use = [ "edit", "md-browser" ] },
-  { url = "*.markdown",  use = [ "edit", "md-browser" ] }
+  { url = "*.[mM][dD]",                          use = [ "edit", "md-browser" ] },
+  { url = "*.[mM][aA][rR][kK][dD][oO][wW][nN]",  use = [ "edit", "md-browser" ] },
+  { url = "*.[hH][tT][mM][lL]",                  use = [ "edit", "chrome", "reveal" ] }
 ]

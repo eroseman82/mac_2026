@@ -161,7 +161,7 @@ pull () {
 # GIT Dotfiles
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
+alias clone='gh repo clone'
 # DOCKER
 alias dockerls='docker ps -a --format "table {{.Names}}\t{{.Image}}"'
 
